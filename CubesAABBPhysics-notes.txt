@@ -1,0 +1,109 @@
+Code in c++ implementation of cubes collision using aabb floor at z =0 and I have OpenGL rendering the cubes already just need the physics cide
+This C++ implementation provides the physics for cube collision using Axis-Aligned Bounding Box (AABB) checks. It includes functions for updating cube positions and velocities based on gravity, and handling collisions with both an AABB floor and other AABB cubes. The code assumes you have a Cube class with position (vec3), velocity (vec3), and halfSize (float).
+
+Cube Physics Implementation
+
+The following code includes the necessary headers and a vec3 struct for vector operations, as well as the Cube struct. The updateCubes function is the core of the physics simulation, handling gravity, collisions with the floor, and inter-cube collisions.
+
+C++
+#include <vector>
+#include <glm/glm.hpp>
+
+// Assuming glm::vec3 is used for vectors
+using namespace glm;
+
+// AABB Cube struct
+struct Cube {
+    vec3 position;
+    vec3 velocity;
+    float halfSize;
+};
+
+// Check for AABB collision
+bool checkAABBCollision(const Cube& a, const Cube& b) {
+    return (abs(a.position.x - b.position.x) < (a.halfSize + b.halfSize)) &&
+           (abs(a.position.y - b.position.y) < (a.halfSize + b.halfSize)) &&
+           (abs(a.position.z - b.position.z) < (a.halfSize + b.halfSize));
+}
+
+// Resolve AABB collision
+void resolveAABBCollision(Cube& a, Cube& b) {
+    vec3 normal = normalize(a.position - b.position);
+    float overlap = (a.halfSize + b.halfSize) - length(a.position - b.position);
+
+    if (overlap > 0) {
+        // Separate the cubes
+        vec3 separation = normal * (overlap / 2.0f);
+        a.position += separation;
+        b.position -= separation;
+
+        // Simple impulse-based resolution
+        float relativeVelocity = dot(a.velocity - b.velocity, normal);
+        if (relativeVelocity < 0) {
+            vec3 impulse = (a.velocity - b.velocity) - normal * relativeVelocity;
+            a.velocity -= impulse;
+            b.velocity += impulse;
+        }
+    }
+}
+
+// Update all cubes
+void updateCubes(std::vector<Cube>& cubes, float deltaTime) {
+    const float gravity = -9.8f;
+    const float restitution = 0.5f; // Bounciness
+    const float floorZ = 0.0f;
+
+    // Apply gravity
+    for (auto& cube : cubes) {
+        cube.velocity.z += gravity * deltaTime;
+        cube.position += cube.velocity * deltaTime;
+    }
+
+    // Floor collision
+    for (auto& cube : cubes) {
+        if (cube.position.z - cube.halfSize <= floorZ) {
+            cube.position.z = floorZ + cube.halfSize;
+            cube.velocity.z *= -restitution; // Reverse velocity with restitution
+            if (abs(cube.velocity.z) < 0.1f) {
+                cube.velocity.z = 0.0f; // Stop small bounces
+            }
+        }
+    }
+
+    // Cube-to-cube collision
+    for (size_t i = 0; i < cubes.size(); ++i) {
+        for (size_t j = i + 1; j < cubes.size(); ++j) {
+            if (checkAABBCollision(cubes[i], cubes[j])) {
+                resolveAABBCollision(cubes[i], cubes[j]);
+            }
+        }
+    }
+}
+Explanation of the Code
+
+checkAABBCollision
+
+This function performs a simple Axis-Aligned Bounding Box (AABB) collision check. It returns true if the cubes overlap on all three axes (x, y, and z). The check is based on the distance between the centers of the cubes being less than the sum of their half-sizes.
+
+resolveAABBCollision
+
+This function handles the response to a collision.
+
+It first calculates the normal vector of the collision, which points from one cube's center to the other.
+
+It then calculates the overlap distance.
+
+The cubes are separated by moving them along the normal vector, each by half the overlap distance. This ensures they are no longer intersecting.
+
+A basic impulse-based response is applied to change the velocities. It calculates the relative velocity along the normal and reverses it, effectively "bouncing" the cubes off each other.
+
+updateCubes
+
+This is the main function that you'll call each frame in your game loop.
+
+Gravity and Integration: It applies gravity to the z component of each cube's velocity and then updates the cube's position based on its velocity and the deltaTime.
+
+Floor Collision: It checks if a cube's bottom face ( position.z - halfSize ) has gone below the floor plane (z = 0). If it has, it corrects the position and reverses the z velocity, multiplying by a restitution value to simulate energy loss (bouncing).
+
+Cube-to-Cube Collision: It iterates through all pairs of cubes. If a collision is detected by checkAABBCollision, it calls resolveAABBCollision to handle the physical response.
+
