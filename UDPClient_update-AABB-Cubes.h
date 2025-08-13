@@ -8,12 +8,12 @@
 
 #endif
 
-
+extern std::vector <Cube> cubes;
 
 // AABB Cube struct
 struct Cube {
-    vec3 position;
-    vec3 velocity;
+    glm::vec3 position;
+    glm::vec3 velocity;
     float halfSize;
 };
 
