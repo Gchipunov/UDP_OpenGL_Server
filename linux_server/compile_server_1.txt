@@ -1,0 +1,4 @@
+gcc ana_game_sever-main.cpp -o ana_game_sever-main  
+
+./ana_game_sever-main
+
