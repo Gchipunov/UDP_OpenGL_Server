@@ -1,21 +1,16 @@
 #include <vector>
 #include <glm/glm.hpp>
+#include "UDPClient_update-AABB-Cubes.h"
 
 // Assuming glm::vec3 is used for vectors
 using namespace glm;
 
-// AABB Cube struct
-struct Cube {
-    vec3 position;
-    vec3 velocity;
-    float halfSize;
-};
 
 // Check for AABB collision
 bool checkAABBCollision(const Cube& a, const Cube& b) {
     return (abs(a.position.x - b.position.x) < (a.halfSize + b.halfSize)) &&
-           (abs(a.position.y - b.position.y) < (a.halfSize + b.halfSize)) &&
-           (abs(a.position.z - b.position.z) < (a.halfSize + b.halfSize));
+        (abs(a.position.y - b.position.y) < (a.halfSize + b.halfSize)) &&
+        (abs(a.position.z - b.position.z) < (a.halfSize + b.halfSize));
 }
 
 // Resolve AABB collision
