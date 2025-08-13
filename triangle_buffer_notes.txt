@@ -1,0 +1,70 @@
+// Triangle 1: 0, 1, 2
+// Triangle 2: 0, 2, 3
+    float verticesUDPCube[] = {
+        // face 1
+                 -1.0f, -2.0f, 2.0f, 0.0f, 0.0f, // bottom - left , 0 (bottom-left)
+          -1.0f, -1.0f, 2.0f, 0.0f, 0.0f, // bottom - right , 1 (bottom-right)
+           -2.0f , -1.0f , 2.0f ,  0.0f, 0.0f,  // top -right , 2 (top-right)
+             -1.0f, -2.0f, 2.0f, 0.0f, 0.0f, // bottom - left , 0 (bottom-left)
+            -2.0f , -1.0f , 2.0f ,  0.0f, 0.0f,  // top -right , 2 (top-right)
+         -2.0f , -2.0f , 2.0f ,  0.0f, 0.0f,  // top - left  , 3 (top-left) 
+        
+
+        
+          // face 2
+        -1.0f, -2.0f, 1.0f, 0.0f, 0.0f, // bottom -left, 0 (bottom-left)
+        -1.0f , -1.0f , 2.0f, 0.0f, 0.0f, // bottom - right, 1 (bottom-right)
+        -1.0f, -1.0f, 2.0f, 0.0f, 0.0f, // top - right, 2 (top-right)
+
+        -1.0f, -2.0f, 1.0f, 0.0f, 0.0f, // bottom -left, 0 (bottom-left)
+        -1.0f, -1.0f, 2.0f, 0.0f, 0.0f, // top - right, 2 (top-right)
+        -1.0f, -2.0f , 2.0f, 0.0f, 0.0f,  // top - left, 3 (top-left)
+          
+        // Triangle 1: 0, 1, 2
+        // Triangle 2: 0, 2, 3
+        // face 3
+        -1.0f, -1.0f, 1.0f, 0.0f, 0.0f, // bottom - left, 0 (bottom-left)
+        -2.0f, -1.0f, 1.0f, 0.0f, 0.0f, // bottom - right, 1 (bottom-right)
+        -2.0f, -1.0f, 2.0f, 0.0f, 0.0f, // top - right, 2 (top-right)
+
+        -1.0f, -1.0f, 1.0f, 0.0f, 0.0f, // bottom - left, 0 (bottom-left)
+        -2.0f, -1.0f, 2.0f, 0.0f, 0.0f, // top - right, 2 (top-right)
+        -1.0f, -1.0f, 2.0f, 0.0f, 0.0f, // top - left, 3 (top-left)
+       
+
+
+
+        // face 4 
+        -2.0f, -2.0f, 1.0f, 0.0f, 0.0f, // bottom - left, 0 (bottom-left)
+        -1.0f, -2.0f, 1.0f, 0.0f, 0.0f, // bottom - right, 1 (bottom-right)
+        -1.0f, -2.0f, 2.0f, 0.0f, 0.0f, // top - right, 2 (top-right)
+
+        -2.0f, -2.0f, 1.0f, 0.0f, 0.0f, // bottom - left, 0 (bottom-left)
+        -1.0f, -2.0f, 2.0f, 0.0f, 0.0f, // top - right, 2 (top-right)
+        -2.0f, -2.0f, 2.0f, 0.0f, 0.0f, // top - left, 3 (top-left)
+        
+
+
+        // Triangle 1: 0, 1, 2
+        // Triangle 2: 0, 2, 3
+        // face 5
+        -2.0f, -1.0f, 1.0f, 0.0f, 0.0f, // bottom - left, 0 (bottom-left)
+        -2.0f, -2.0f, 1.0f, 0.0f, 0.0f, // bottom - right, 1 (bottom-right)
+        -2.0f, -2.0f, 2.0f, 0.0f, 0.0f, // top - right, 2 (top-right)
+        -2.0f, -1.0f, 1.0f, 0.0f, 0.0f, // bottom - left, 0 (bottom-left)
+        -2.0f, -2.0f, 2.0f, 0.0f, 0.0f, // top - right, 2 (top-right)
+        -2.0f, -1.0f, 2.0f , 0.0f, 0.0f, // top - left, 3 (top-left)
+        
+
+
+
+        // face 6
+
+        -2.0f, -2.0f, 1.0f, 0.0f, 0.0f, // bottom - left, 0 (bottom-left)
+        -2.0f, -1.0f, 1.0f, 0.0f, 0.0f, // bottom - right, 1 (bottom-right)
+        -1.0f, -1.0f, 1.0f, 0.0f, 0.0f, // top - right, 2 (top-right)
+
+        -2.0f, -2.0f, 1.0f, 0.0f, 0.0f, // bottom - left, 0 (bottom-left)
+        -1.0f, -1.0f, 1.0f, 0.0f, 0.0f, // top - right, 2 (top-right)
+        -1.0f, -2.0f, 1.0f, 0.0f, 0.0f, // top - left, 3 (top-left)
+        };
